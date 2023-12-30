@@ -1,0 +1,41 @@
+body {
+    background-color: #BFD3C1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    font-family: 'Barlow', sans-serif;
+}
+.image {
+    height: 100px;
+    width: 100px;
+    background-color: #FFE5D4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+
+.generate {
+    margin-top: 50px;
+    background-color: #EFC7C2;
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.generate:hover{
+    background-color: #d49d9d;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}
