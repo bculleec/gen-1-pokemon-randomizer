@@ -2,30 +2,25 @@ const pokemon_names = [];
 const pokemon_urls = [];
 const screen = document.querySelector('.image');
 const display_name = document.querySelector('.pokemon-name');
+const url = 'https://pokeapi.co/api/v2/pokedex/2';
 
-function GetPokemonData() {
-    fetch('https://pokeapi.co/api/v2/pokedex/2')
-    .then(res => {
-        return res.json();
+
+
+async function GetPokemonData() {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    data.pokemon_entries.forEach(async entry => {
+        pokemon_names.push(entry.pokemon_species.name);
+        const pokemon_url = `https://pokeapi.co/api/v2/pokemon/${ entry.entry_number }/`;
+
+        const response2 = await fetch(pokemon_url);
+        const pokemon_data = await response2.json();
+
+        sprite_url = pokemon_data.sprites.front_default;
+        pokemon_urls.push(sprite_url);
+        
     })
-    .then(data=>{
-        data.pokemon_entries.forEach(element => {
-            const markup = `<p>${ element.pokemon_species.name} ${ element.entry_number }</p>`;
-            const pokemon_url = `https://pokeapi.co/api/v2/pokemon/${ element.entry_number }/`;
-            let sprite_url = ``;
-            
-            pokemon_names.push(element.pokemon_species.name);
-            fetch(pokemon_url)
-            .then(response => {
-                return response.json();
-            })
-            .then(pokemon_data =>{
-                sprite_url = pokemon_data.sprites.front_default;
-                pokemon_urls.push(sprite_url);
-            })   
-        });
-    })
-    .catch(error => console.log(error));
 }
 
 GetPokemonData();
